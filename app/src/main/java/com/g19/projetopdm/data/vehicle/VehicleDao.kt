@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface UserDao {
+interface VehicleDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addVehicle(vehicle: Vehicle)
@@ -21,5 +21,7 @@ interface UserDao {
     @Query("SELECT * FROM Vehicle where type =(:type)")
     fun findByType (type: String) : Vehicle
 
+    @Query("SELECT DISTINCT type FROM vehicle")
+    fun getAllTypes(): LiveData<List<String>>
 
 }
