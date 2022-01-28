@@ -16,7 +16,7 @@ interface VehicleDao {
     fun allVehicles(): LiveData<List<Vehicle>>
 
     @Query("DELETE FROM Vehicle where id =(:id)")
-    fun removeById (id: Int) : Vehicle
+    fun removeById (id: Int)
 
     @Query("SELECT * FROM Vehicle where type =(:type)")
     fun findByType (type: String) : Vehicle
