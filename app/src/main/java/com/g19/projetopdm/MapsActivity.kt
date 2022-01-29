@@ -1,15 +1,19 @@
 package com.g19.projetopdm
 
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.g19.projetopdm.databinding.ActivityMapsBinding
+import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory.fromResource
+import java.util.ArrayList
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -26,6 +30,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
     }
 
     /**
@@ -40,9 +45,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        // Add a marker in Porto Portugal and move the camera
+        val porto = LatLng(41.15, -8.61)
+        mMap.addMarker(MarkerOptions().position(porto).title("Marker in Porto"))
+
+        var porto2 = LatLng(41.16, -8.62)
+        mMap.addMarker(MarkerOptions().position(porto2).title("Marker in Porto2"))
+
+        var porto3 = LatLng(41.16, -8.60)
+        mMap.addMarker(MarkerOptions().position(porto3).title("Marker in Porto3"))
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(porto))
+        mMap.setOnCircleClickListener { this }
+
     }
+
+
 }
