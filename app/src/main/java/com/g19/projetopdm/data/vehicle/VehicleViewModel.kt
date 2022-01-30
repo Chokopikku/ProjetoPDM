@@ -36,7 +36,4 @@ class VehicleViewModel(application: Application): AndroidViewModel(application) 
             repository.removeVehicle(id)
         }
     }
-
-
-
 }

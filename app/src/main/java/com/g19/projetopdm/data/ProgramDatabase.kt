@@ -1,20 +1,27 @@
 package com.g19.projetopdm.data
 
 import android.content.Context
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.g19.projetopdm.data.user.User
+import com.g19.projetopdm.data.user.UserDao
 import com.g19.projetopdm.data.vehicle.Vehicle
 import com.g19.projetopdm.data.vehicle.VehicleDao
 
 
-@Database(entities = [Vehicle::class], version = 1, exportSchema = false)
-abstract class ProgramDatabase: RoomDatabase() {
+@Database(version = 1, exportSchema = false, entities = [Vehicle::class, User::class])
+abstract class ProgramDatabase() : RoomDatabase(), Parcelable {
+
+    constructor(parcel: Parcel): this() {
+    }
 
     abstract fun vehicleDao(): VehicleDao
-    //quando tivermos o user, chamar aqui o DAO como em cima
+    abstract fun userDao(): UserDao
 
-    companion object{
+    companion object {
         @Volatile
         private var INSTANCE: ProgramDatabase? = null
 
@@ -23,7 +30,7 @@ abstract class ProgramDatabase: RoomDatabase() {
             if(tempInstance != null){
                 return tempInstance
             }
-            synchronized(this){
+            synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     ProgramDatabase::class.java,

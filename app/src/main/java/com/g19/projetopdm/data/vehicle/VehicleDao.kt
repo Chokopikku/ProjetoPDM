@@ -23,5 +23,4 @@ interface VehicleDao {
 
     @Query("SELECT DISTINCT type FROM vehicle")
     fun getAllTypes(): LiveData<List<String>>
-
 }
