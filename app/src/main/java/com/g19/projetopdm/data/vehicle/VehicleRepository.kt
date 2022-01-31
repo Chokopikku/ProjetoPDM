@@ -18,6 +18,9 @@ class VehicleRepository(private val vehicleDao: VehicleDao) {
     suspend fun removeVehicle(id: Int){
         vehicleDao.removeById(id)
     }
+    suspend fun findBySharepoint(sharePoint: Int){
+        vehicleDao.findBySharepoint(sharePoint)
+    }
 
 
 }

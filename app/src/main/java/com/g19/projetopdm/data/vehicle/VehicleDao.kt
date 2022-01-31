@@ -19,9 +19,12 @@ interface VehicleDao {
     fun removeById (id: Int)
 
     @Query("SELECT * FROM Vehicle where type =(:type)")
-    fun findByType (type: String) : Vehicle
+    fun findByType (type: String) : LiveData<List<Vehicle>>
 
     @Query("SELECT DISTINCT type FROM vehicle")
     fun getAllTypes(): LiveData<List<String>>
+
+    @Query("SELECT * FROM Vehicle where sharePoint =(:sharePoint)")
+    fun findBySharepoint (sharePoint: Int) : LiveData<List<Vehicle>>
 
 }

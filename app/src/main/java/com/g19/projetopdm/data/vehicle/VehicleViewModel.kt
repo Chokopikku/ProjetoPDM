@@ -37,6 +37,12 @@ class VehicleViewModel(application: Application): AndroidViewModel(application) 
         }
     }
 
+    fun findBySharepoint(sharePoint : Int){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.findBySharepoint(sharePoint)
+        }
+    }
+
 
 
 }

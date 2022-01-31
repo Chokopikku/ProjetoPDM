@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Carlos/Desktop/ProjetoPDM/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Carlos/Desktop/ProjetoPDM/app/src/main/res/layout/activity_vehicle.xml" value="0.17" />
+        <entry key="..\:/Users/Carlos/Desktop/ProjetoPDM/app/src/main/res/layout/activity_vehicle_map.xml" value="0.18" />
+        <entry key="..\:/Users/Carlos/Desktop/ProjetoPDM/app/src/main/res/layout/fragment_maps.xml" value="0.14" />
+        <entry key="..\:/Users/Carlos/Desktop/ProjetoPDM/app/src/main/res/layout/vehicle_item.xml" value="0.22" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19791666666666666" />
       </map>
