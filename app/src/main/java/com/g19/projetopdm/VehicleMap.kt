@@ -1,5 +1,6 @@
 package com.g19.projetopdm
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
@@ -8,10 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -23,7 +21,7 @@ import com.g19.projetopdm.data.vehicle.Vehicle
 import com.g19.projetopdm.data.vehicle.VehicleViewModel
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.fromResource
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -70,6 +68,12 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
 
     private fun configure() {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
+        var qrButton = findViewById<FloatingActionButton>(R.id.fabQr)
+
+        var vehicleButton = findViewById<Button>(R.id.vehicleIDButton)
+        var vehicleID = findViewById<TextView>(R.id.vehicleID)
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -77,6 +81,21 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
         var typeOfVehicle = findViewById<Spinner>(R.id.type_of_vehicle_spinner)
 
         spinner(typeOfVehicle)
+
+        qrButton.setOnClickListener {
+            startActivity(Intent(this,QrScannerActivity::class.java))
+        }
+        vehicleButton.setOnClickListener {
+            var id = vehicleID.text
+
+            if (id == ""){
+                Toast.makeText(applicationContext, "Insira o ID do veiculo", Toast.LENGTH_SHORT).show()
+            }else{
+                var intent = Intent(this,RentActivity::class.java)
+                intent.putExtra("vehicleID",vehicleID.text)
+                startActivity(intent)
+            }
+        }
     }
 
 
