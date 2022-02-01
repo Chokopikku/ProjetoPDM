@@ -2,6 +2,7 @@ package com.g19.projetopdm
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -20,59 +21,54 @@ import com.g19.projetopdm.databinding.ActivityVehicleMapBinding
 import androidx.lifecycle.ViewModelProvider
 import com.g19.projetopdm.data.vehicle.Vehicle
 import com.g19.projetopdm.data.vehicle.VehicleViewModel
-import com.g19.projetopdm.lists.VehicleAdapter
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.fromResource
 
 
+
 class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-    private lateinit var map: GoogleMap
-    private lateinit var binding: ActivityVehicleMapBinding
-    private lateinit var vehicleViewModel: VehicleViewModel
-    //private lateinit var recyclerView: RecyclerView
-    private var adapter: VehicleAdapter? = null
-
-    val matosinhos = LatLng(41.16783511208824, -8.687091618191157)
-    val baguimMonte = LatLng(41.18739973749522, -8.540007736199222)
-    val ermesinde = LatLng(41.215129046031926, -8.553404008671329)
-    val gaia = LatLng(41.12976818209694, -8.606419931811327)
-    val center = LatLng(40.10630819103435, -7.822119146421931)
-    val porto = LatLng(41.11130339905875, -8.655062483019536)
-    val braga = LatLng(41.523883246182486, -8.417601521236854)
-    val maia = LatLng(41.229512728605044, -8.62394518225489)
-    val vilaDoConde = LatLng(41.3522380764589, -8.74058506928767)
-    val famalicao = LatLng(41.40610782621928, -8.52074750159189)
-    val lisbon = LatLng(38.729907369824694, -9.132886962175466)
-    val cascais = LatLng(38.695443934584524, -9.424629431638879)
-    val setubal = LatLng(38.53053981830144, -8.896806563180334)
-    val portimao = LatLng(37.14641434328816, -8.5487224607713)
-    val sagres = LatLng(37.021522087697996, -8.974442670878442)
-    val faro = LatLng(37.02810049341605, -7.949967584620608)
-    val vilaReal = LatLng(41.337801875886626, -7.731845128026691)
-    val viseu = LatLng(40.67972376703032, -7.9376191840278)
+    private val matosinhos = LatLng(41.16783511208824, -8.687091618191157)
+    private val baguimMonte = LatLng(41.18739973749522, -8.540007736199222)
+    private val ermesinde = LatLng(41.215129046031926, -8.553404008671329)
+    private val gaia = LatLng(41.12976818209694, -8.606419931811327)
+    private val center = LatLng(40.10630819103435, -7.822119146421931)
+    private val porto = LatLng(41.11130339905875, -8.655062483019536)
+    private val braga = LatLng(41.523883246182486, -8.417601521236854)
+    private val maia = LatLng(41.229512728605044, -8.62394518225489)
+    private val vilaDoConde = LatLng(41.3522380764589, -8.74058506928767)
+    private val famalicao = LatLng(41.40610782621928, -8.52074750159189)
+    private val lisbon = LatLng(38.729907369824694, -9.132886962175466)
+    private val cascais = LatLng(38.695443934584524, -9.424629431638879)
+    private val setubal = LatLng(38.53053981830144, -8.896806563180334)
+    private val portimao = LatLng(37.14641434328816, -8.5487224607713)
+    private val sagres = LatLng(37.021522087697996, -8.974442670878442)
+    private val faro = LatLng(37.02810049341605, -7.949967584620608)
+    private val vilaReal = LatLng(41.337801875886626, -7.731845128026691)
+    private val viseu = LatLng(40.67972376703032, -7.9376191840278)
 
     val cars = arrayOf<LatLng>(matosinhos,ermesinde,baguimMonte,gaia,porto,setubal,portimao,vilaDoConde,vilaReal,lisbon,maia,braga,famalicao)
     val trotinete = arrayOf<LatLng>(porto,matosinhos,setubal,portimao,vilaDoConde,vilaReal,lisbon,maia,braga)
     val bicicleta = arrayOf<LatLng>(setubal,lisbon,cascais,maia,ermesinde,viseu,matosinhos)
     val mota = arrayOf<LatLng>(matosinhos,ermesinde,maia,vilaReal,vilaDoConde,lisbon,famalicao,cascais,sagres)
 
+    private lateinit var map: GoogleMap
+    private lateinit var binding: ActivityVehicleMapBinding
+    private lateinit var vehicleViewModel: VehicleViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
-
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        getSupportActionBar()?.hide()
+        this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        supportActionBar?.hide()
         binding = ActivityVehicleMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         configure()
     }
 
-
-    fun configure() {
+    private fun configure() {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -83,6 +79,8 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
         spinner(typeOfVehicle)
     }
 
+
+    //adds data to the vehicle database
     fun addData(){
         val vehicle0 = Vehicle(0,"Car","23cm3",3,"Y","Tesla",true)
         val vehicle1 = Vehicle(0,"Trotinete","23cm3",3,"Y","Tesla",true)
@@ -94,14 +92,13 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
         vehicleViewModel.addVehicle(vehicle2)
     }
 
-    fun spinner(spinner : Spinner){
+    private fun spinner(spinner : Spinner){
 
         val option = arrayOf("Carro","Bicicleta","Trotinete","Mota")
 
-        var selectedItem : String = ""
+        var selectedItem = ""
 
-
-        spinner.adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,option)
+        spinner.adapter = ArrayAdapter(this,android.R.layout.simple_dropdown_item_1line,option)
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -110,27 +107,29 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
                 selectedItem = spinner.selectedItem.toString()
-
                 Toast.makeText(applicationContext, selectedItem + "s disponiveis", Toast.LENGTH_SHORT).show()
-
                 if (selectedItem == "Carro"){
                     map.clear()
-
                     cars.forEach {
-                        map.addMarker(MarkerOptions().position(it).title("Ponto de Partilha com Carros"))
+                        map.addMarker(MarkerOptions().position(it).title("Ponto de Partilha com Carros").icon(
+                            fromResource(R.drawable.iconcar)
+                        ))
                     }
                 }
                 if (selectedItem == "Trotinete"){
                     map.clear()
                     trotinete.forEach {
-                        map.addMarker(MarkerOptions().position(it).title("SharePoint de"))
+                        map.addMarker(MarkerOptions().position(it).title("SharePoint de").icon(
+                            fromResource(R.drawable.icontrotinete1)
+                        ))
                     }
                 }
                 if (selectedItem == "Bicicleta"){
                     map.clear()
 
                     bicicleta.forEach {
-                        map.addMarker(MarkerOptions().position(it).title("SharePoint de"))
+                        map.addMarker(MarkerOptions().position(it).title("SharePoint de").icon(
+                            fromResource(R.drawable.bikeicon)))
                     }
 
                 }
@@ -197,7 +196,4 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
         return false
     }
 
-
-
-
-}
+  }
