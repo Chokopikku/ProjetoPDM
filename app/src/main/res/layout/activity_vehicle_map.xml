@@ -26,10 +26,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="176dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="33dp"
         android:clickable="true"
         app:backgroundTint="#97CA37"
-        app:layout_constraintBottom_toBottomOf="@+id/map"
+        app:layout_constraintBottom_toTopOf="@+id/vehicleID"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/qr" />
 
@@ -57,32 +57,31 @@
         android:id="@+id/vehicleID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:gravity="center"
-        android:hint="Inserir codigo do veiculo"
+        android:hint="Inserir código do veículo"
         android:inputType="numberDecimal"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/vehicleIDButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="56dp"
         android:layout_marginBottom="24dp"
         android:text="Alugar"
         android:textColor="#409F36"
         app:backgroundTint="@color/cardview_light_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toEndOf="@+id/vehicleID"
         app:layout_constraintTop_toBottomOf="@+id/map"
-        app:layout_constraintVertical_bias="0.896" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

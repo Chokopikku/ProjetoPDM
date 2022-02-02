@@ -69,10 +69,10 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
     private fun configure() {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
-        var qrButton = findViewById<FloatingActionButton>(R.id.fabQr)
+        val qrButton = findViewById<FloatingActionButton>(R.id.fabQr)
 
-        var vehicleButton = findViewById<Button>(R.id.vehicleIDButton)
-        var vehicleID = findViewById<TextView>(R.id.vehicleID)
+        val vehicleButton = findViewById<Button>(R.id.vehicleIDButton)
+        val vehicleID = findViewById<EditText>(R.id.vehicleID)
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -86,13 +86,13 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
             startActivity(Intent(this,QrScannerActivity::class.java))
         }
         vehicleButton.setOnClickListener {
-            var id = vehicleID.text
+            val id = vehicleID.text.toString() //val id = vehicleID.text
 
-            if (id == ""){
+            if (id.isEmpty() || id.equals(" ")){ // if id equals to empty string or space -> block
                 Toast.makeText(applicationContext, "Insira o ID do veiculo", Toast.LENGTH_SHORT).show()
             }else{
                 var intent = Intent(this,RentActivity::class.java)
-                intent.putExtra("vehicleID",vehicleID.text)
+                intent.putExtra("vehicleID", id) //intent.putExtra("vehicleID",vehicleID.text)
                 startActivity(intent)
             }
         }
