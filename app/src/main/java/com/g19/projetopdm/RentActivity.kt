@@ -27,8 +27,19 @@ class RentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rent)
+        vehicleInfo()
         configure()
     }
+
+    fun vehicleInfo(){
+        // add values to text view's
+        val vehicleIDTextView = findViewById<TextView>(R.id.idValuetextView)
+        val consumoTextView = findViewById<TextView>(R.id.consumoValueTextView)
+        val precoTextView = findViewById<TextView>(R.id.priceValueTextView)
+
+        var vehicleID = intent.getStringExtra("vehicleID").toString()
+    }
+
 
     fun configure(){
 
