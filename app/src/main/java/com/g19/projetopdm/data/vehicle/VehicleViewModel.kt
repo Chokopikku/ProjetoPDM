@@ -20,7 +20,6 @@ class VehicleViewModel(application: Application): AndroidViewModel(application) 
         allVehicles = repository.allVehicles
         getAllTypes = repository.getAllTypes
     }
-
     fun addVehicle(vehicle: Vehicle){
         viewModelScope.launch(Dispatchers.IO) {
             repository.addVehicle(vehicle)
@@ -36,13 +35,14 @@ class VehicleViewModel(application: Application): AndroidViewModel(application) 
             repository.removeVehicle(id)
         }
     }
-
     fun findBySharepoint(sharePoint : Int){
         viewModelScope.launch(Dispatchers.IO){
             repository.findBySharepoint(sharePoint)
         }
     }
-
-
-
+    fun findById(id: Int){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.findById(id)
+        }
+    }
 }

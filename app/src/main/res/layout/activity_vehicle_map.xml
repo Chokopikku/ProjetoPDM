@@ -9,7 +9,7 @@
     android:textAlignment="textEnd"
     tools:context=".MainActivity">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="412dp"
@@ -31,7 +31,8 @@
         app:backgroundTint="#97CA37"
         app:layout_constraintBottom_toTopOf="@+id/vehicleID"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/qr" />
+        app:srcCompat="@drawable/qr"
+        android:contentDescription="TODO" />
 
     <Spinner
         android:id="@+id/type_of_vehicle_spinner"
@@ -67,6 +68,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map"
+        app:layout_constraintVertical_bias="0.035"
+        android:autofillHints="" />
         app:layout_constraintVertical_bias="0.0" />
 
     <Button

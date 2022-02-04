@@ -12,9 +12,17 @@ import android.widget.Chronometer
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
+import com.g19.projetopdm.data.ProgramDatabase
+import com.g19.projetopdm.data.vehicle.Vehicle
+import com.g19.projetopdm.data.vehicle.VehicleDao
+import com.g19.projetopdm.data.vehicle.VehicleViewModel
 import com.g19.projetopdm.databinding.ActivityMainBinding
 import com.google.android.material.button.MaterialButton
 import kotlin.math.roundToInt
+
+private lateinit var vehicleViewModel: VehicleViewModel
 
 class RentActivity : AppCompatActivity() {
 
@@ -25,6 +33,7 @@ class RentActivity : AppCompatActivity() {
     var pauseOffSet :Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rent)
         vehicleInfo()
@@ -32,14 +41,19 @@ class RentActivity : AppCompatActivity() {
     }
 
     fun vehicleInfo(){
+        var vehicleId = intent.getStringExtra("vehicleID").toString().toInt()
+
+        val ProgramDatabase : ProgramDatabase = ProgramDatabase.getDatabase(applicationContext)
+        val vehicleDao: VehicleDao = ProgramDatabase.vehicleDao()
+        val vehicle : LiveData<Vehicle> = vehicleDao.findById(vehicleId)
+
         // add values to text view's
         val vehicleIDTextView = findViewById<TextView>(R.id.idValuetextView)
         val consumoTextView = findViewById<TextView>(R.id.consumoValueTextView)
         val precoTextView = findViewById<TextView>(R.id.priceValueTextView)
 
-        var vehicleID = intent.getStringExtra("vehicleID").toString()
+        vehicleIDTextView.text = intent.getStringExtra("vehicleID").toString()
     }
-
 
     fun configure(){
 
@@ -91,5 +105,4 @@ class RentActivity : AppCompatActivity() {
     fun textMsg(s:String,c:Context){
         Toast.makeText(c,s, Toast.LENGTH_SHORT).show()
     }
-
 }

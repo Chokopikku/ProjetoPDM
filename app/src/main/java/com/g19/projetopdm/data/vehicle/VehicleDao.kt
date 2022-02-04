@@ -27,4 +27,7 @@ interface VehicleDao {
     @Query("SELECT * FROM Vehicle where sharePoint =(:sharePoint)")
     fun findBySharepoint (sharePoint: Int) : LiveData<List<Vehicle>>
 
+    @Query("SELECT * FROM Vehicle where id =(:id)")
+    fun findById (id: Int) : LiveData<Vehicle>
+
 }

@@ -10,6 +10,8 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.LiveData
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -17,7 +19,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.g19.projetopdm.databinding.ActivityVehicleMapBinding
 import androidx.lifecycle.ViewModelProvider
+import com.g19.projetopdm.data.ProgramDatabase
 import com.g19.projetopdm.data.vehicle.Vehicle
+import com.g19.projetopdm.data.vehicle.VehicleDao
 import com.g19.projetopdm.data.vehicle.VehicleViewModel
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.fromResource
@@ -91,9 +95,18 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
             if (id.isEmpty() || id.equals(" ")){ // if id equals to empty string or space -> block
                 Toast.makeText(applicationContext, "Insira o ID do veiculo", Toast.LENGTH_SHORT).show()
             }else{
-                var intent = Intent(this,RentActivity::class.java)
-                intent.putExtra("vehicleID", id) //intent.putExtra("vehicleID",vehicleID.text)
-                startActivity(intent)
+
+                val ProgramDatabase : ProgramDatabase = ProgramDatabase.getDatabase(applicationContext)
+                val vehicleDao: VehicleDao = ProgramDatabase.vehicleDao()
+                val vehicle : LiveData<Vehicle> = vehicleDao.findById(id.toInt())
+
+                if (vehicle == null){
+                    AlertDialog.Builder(applicationContext,).setMessage("Não foi encontrado qualquer veiculo com esse ID")
+                }else{
+                    var intent = Intent(this,RentActivity::class.java)
+                    intent.putExtra("vehicleID", id) //intent.putExtra("vehicleID",vehicleID.text)
+                    startActivity(intent)
+                }
             }
         }
     }
@@ -102,8 +115,8 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
     //adds data to the vehicle database
     fun addData(){
         val vehicle0 = Vehicle(0,"Car","23cm3",3,"Y","Tesla",true)
-        val vehicle1 = Vehicle(0,"Trotinete","23cm3",3,"Y","Tesla",true)
-        val vehicle2 = Vehicle(0,"Bicicle","23cm3",3,"Y","Tesla",true)
+        val vehicle1 = Vehicle(2,"Trotinete","23cm3",3,"Y","Tesla",true)
+        val vehicle2 = Vehicle(3,"Bicicle","23cm3",3,"Y","Tesla",true)
 
         vehicleViewModel = ViewModelProvider(this).get(VehicleViewModel::class.java)
         vehicleViewModel.addVehicle(vehicle0)
