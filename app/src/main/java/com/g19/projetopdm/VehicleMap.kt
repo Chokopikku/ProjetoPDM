@@ -1,31 +1,34 @@
 package com.g19.projetopdm
 
+import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.LiveData
-
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.g19.projetopdm.databinding.ActivityVehicleMapBinding
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.g19.projetopdm.data.ProgramDatabase
 import com.g19.projetopdm.data.vehicle.Vehicle
 import com.g19.projetopdm.data.vehicle.VehicleDao
 import com.g19.projetopdm.data.vehicle.VehicleViewModel
-import com.google.android.gms.maps.model.*
+import com.g19.projetopdm.databinding.ActivityVehicleMapBinding
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.fromResource
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -69,13 +72,12 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
 
         configure()
     }
-
     private fun configure() {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
         val qrButton = findViewById<FloatingActionButton>(R.id.fabQr)
 
-        val vehicleButton = findViewById<Button>(R.id.vehicleIDButton)
+        val rentButton = findViewById<Button>(R.id.rentButton)
         val vehicleID = findViewById<EditText>(R.id.vehicleID)
 
         val mapFragment = supportFragmentManager
@@ -89,32 +91,42 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
         qrButton.setOnClickListener {
             startActivity(Intent(this,QrScannerActivity::class.java))
         }
-        vehicleButton.setOnClickListener {
+        rentButton.setOnClickListener {
+            val ref = this
             val id = vehicleID.text.toString() //val id = vehicleID.text
 
             if (id.isEmpty() || id.equals(" ")){ // if id equals to empty string or space -> block
                 Toast.makeText(applicationContext, "Insira o ID do veiculo", Toast.LENGTH_SHORT).show()
             }else{
+                lifecycleScope.launch (Dispatchers.IO){
 
-                val ProgramDatabase : ProgramDatabase = ProgramDatabase.getDatabase(applicationContext)
-                val vehicleDao: VehicleDao = ProgramDatabase.vehicleDao()
-                val vehicle : LiveData<Vehicle> = vehicleDao.findById(id.toInt())
+                    val ProgramDatabase : ProgramDatabase = ProgramDatabase.getDatabase(applicationContext)
+                    val vehicleDao: VehicleDao = ProgramDatabase.vehicleDao()
 
-                if (vehicle == null){
-                    AlertDialog.Builder(applicationContext,).setMessage("Não foi encontrado qualquer veiculo com esse ID")
-                }else{
-                    var intent = Intent(this,RentActivity::class.java)
-                    intent.putExtra("vehicleID", id) //intent.putExtra("vehicleID",vehicleID.text)
-                    startActivity(intent)
+                    addData()
+                    val vehicle =  vehicleDao.findById(id.toInt())
+
+                    ref.runOnUiThread{
+                        if (vehicle != null){
+
+                            val intent = Intent(this@VehicleMap,RentActivity::class.java)
+                            intent.putExtra("vehicleID", id) //intent.putExtra("vehicleID",vehicleID.text)
+                            startActivity(intent)
+                        }else{
+                            findViewById<TextView>(R.id.errorMsg).text = "No such ID in vehicle"
+                            findViewById<TextView>(R.id.errorMsg).isVisible = true
+                        }
+                    }
                 }
+
+
             }
         }
     }
 
-
     //adds data to the vehicle database
     fun addData(){
-        val vehicle0 = Vehicle(0,"Car","23cm3",3,"Y","Tesla",true)
+        val vehicle0 = Vehicle(1,"Car","23cm3",3,"Y","Tesla",true)
         val vehicle1 = Vehicle(2,"Trotinete","23cm3",3,"Y","Tesla",true)
         val vehicle2 = Vehicle(3,"Bicicle","23cm3",3,"Y","Tesla",true)
 
@@ -123,7 +135,6 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
         vehicleViewModel.addVehicle(vehicle1)
         vehicleViewModel.addVehicle(vehicle2)
     }
-
     private fun spinner(spinner : Spinner){
 
         val option = arrayOf("Carro","Bicicleta","Trotinete","Mota")
@@ -131,6 +142,8 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
         var selectedItem = ""
 
         spinner.adapter = ArrayAdapter(this,android.R.layout.simple_dropdown_item_1line,option)
+
+        intent.getStringExtra("filter")?.let { spinner.setSelection(it.toInt()) }
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -169,7 +182,8 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
                     map.clear()
 
                     mota.forEach {
-                        map.addMarker(MarkerOptions().position(it).title("SharePoint de"))
+                        map.addMarker(MarkerOptions().position(it).title("SharePoint de").icon(
+                            fromResource(R.drawable.ic_baseline_electric_bike_24)))
                     }
 
                 }
@@ -177,7 +191,6 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
             }
         }
     }
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -187,10 +200,8 @@ class VehicleMap : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-
 
         map.addMarker(MarkerOptions().position(matosinhos).title("SharePoint de Matosinhos"))
         map.addMarker(MarkerOptions().position(baguimMonte).title("SharePoint do Baguim do Monte"))

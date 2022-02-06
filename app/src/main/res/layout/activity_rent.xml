@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RentActivity"
-    android:orientation="vertical">
+    android:background="#97CA37"
+    android:orientation="vertical"
+    tools:context=".RentActivity">
 
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="30dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -28,6 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID do veículo: "
+                android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -35,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Consumo: "
+                android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -42,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Preço por minuto: "
+                android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
@@ -55,19 +59,22 @@
                 android:id="@+id/idValuetextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Idx123" />
+                android:text="Idx123"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/consumoValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="valor" />
+                android:text="valor"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/priceValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="€\minutos" />
+                android:text="€\minutos"
+                android:textSize="20sp" />
         </LinearLayout>
 
 
@@ -94,12 +101,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:background="#409F36"
+            android:background="#97CA37"
             android:elevation="15dp"
             android:gravity="center"
             android:padding="6dp"
             android:text="Timer"
-            android:textColor="@color/white"
+            android:textColor="#616161"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -115,7 +122,7 @@
             android:paddingTop="10dp"
             android:paddingRight="15dp"
             android:paddingBottom="10dp"
-            android:textColor="#409F36"
+            android:textColor="#97CA37"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -150,14 +157,31 @@
 
     <TextView
         android:id="@+id/spentTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="124dp"
+        android:layout_width="202dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="176dp"
+        android:gravity="center"
         android:text="Total gasto ... €"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/finishButton"
+        android:layout_width="266dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="76dp"
+        android:text="Terminar Aluguer"
+        android:textColor="#409F36"
+        app:backgroundTint="@color/cardview_light_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spentTextView"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

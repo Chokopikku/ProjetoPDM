@@ -21,7 +21,7 @@ class VehicleRepository(private val vehicleDao: VehicleDao) {
     fun findBySharepoint(sharePoint: Int){
         vehicleDao.findBySharepoint(sharePoint)
     }
-    fun findById(id: Int): LiveData<Vehicle> {
+    fun findById(id: Int): Vehicle {
         return vehicleDao.findById(id)
     }
 

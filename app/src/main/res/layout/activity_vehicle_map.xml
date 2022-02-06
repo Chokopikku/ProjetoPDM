@@ -7,6 +7,7 @@
     android:background="#97CA37"
     android:foregroundGravity="center"
     android:textAlignment="textEnd"
+    android:visibility="visible"
     tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -28,11 +29,11 @@
         android:layout_marginEnd="176dp"
         android:layout_marginBottom="33dp"
         android:clickable="true"
+        android:contentDescription="TODO"
         app:backgroundTint="#97CA37"
         app:layout_constraintBottom_toTopOf="@+id/vehicleID"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/qr"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/qr" />
 
     <Spinner
         android:id="@+id/type_of_vehicle_spinner"
@@ -42,8 +43,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="#BAFFFFFF"
-        android:backgroundTint="#A6FFFFFF"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
         android:foregroundTint="#090808"
         android:gravity="center"
         android:hapticFeedbackEnabled="true"
@@ -60,6 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="28dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="Inserir código do veículo"
         android:inputType="numberDecimal"
@@ -68,12 +70,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map"
-        app:layout_constraintVertical_bias="0.035"
-        android:autofillHints="" />
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.035" />
+    app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/vehicleIDButton"
+        android:id="@+id/rentButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -86,5 +87,13 @@
         app:layout_constraintStart_toEndOf="@+id/vehicleID"
         app:layout_constraintTop_toBottomOf="@+id/map"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/errorMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/vehicleID"
+        tools:layout_editor_absoluteX="145dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,17 +12,19 @@ import android.widget.Chronometer
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.g19.projetopdm.data.ProgramDatabase
 import com.g19.projetopdm.data.vehicle.Vehicle
 import com.g19.projetopdm.data.vehicle.VehicleDao
 import com.g19.projetopdm.data.vehicle.VehicleViewModel
 import com.g19.projetopdm.databinding.ActivityMainBinding
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
-
-private lateinit var vehicleViewModel: VehicleViewModel
 
 class RentActivity : AppCompatActivity() {
 
@@ -43,16 +45,30 @@ class RentActivity : AppCompatActivity() {
     fun vehicleInfo(){
         var vehicleId = intent.getStringExtra("vehicleID").toString().toInt()
 
-        val ProgramDatabase : ProgramDatabase = ProgramDatabase.getDatabase(applicationContext)
-        val vehicleDao: VehicleDao = ProgramDatabase.vehicleDao()
-        val vehicle : LiveData<Vehicle> = vehicleDao.findById(vehicleId)
+        val ref = this
 
         // add values to text view's
         val vehicleIDTextView = findViewById<TextView>(R.id.idValuetextView)
         val consumoTextView = findViewById<TextView>(R.id.consumoValueTextView)
         val precoTextView = findViewById<TextView>(R.id.priceValueTextView)
+        var vehicleid= intent.getStringExtra("vehicleID").toString()
 
-        vehicleIDTextView.text = intent.getStringExtra("vehicleID").toString()
+
+
+        lifecycleScope.launch (Dispatchers.IO){
+
+            val ProgramDatabase : ProgramDatabase = ProgramDatabase.getDatabase(applicationContext)
+            val vehicleDao: VehicleDao = ProgramDatabase.vehicleDao()
+
+            val vehicle =  vehicleDao.findById(vehicleid.toInt())
+
+            ref.runOnUiThread{
+                if (vehicle != null){
+                    vehicleIDTextView.text = vehicle.id.toString()
+                    consumoTextView.text = vehicle.consumption
+                }
+            }
+    }
     }
 
     fun configure(){
@@ -66,9 +82,9 @@ class RentActivity : AppCompatActivity() {
             if (!isPlay){
                 chronomter.base = SystemClock.elapsedRealtime() - pauseOffSet
                 chronomter.start()
-                pauseBtn.visibility = View.VISIBLE
+                pauseBtn.visibility = View.GONE
                 playBtn.setImageResource(R.drawable.ic_stop)
-                textMsg("Chronomter is Start !!",this)
+                textMsg("Aluguer iniciado !!",this)
                 isPlay  =true
 
             }
@@ -78,12 +94,12 @@ class RentActivity : AppCompatActivity() {
                 chronomter.stop()
                 playBtn.setImageResource(R.drawable.ic_play)
                 pauseBtn.visibility = View.GONE
-                textMsg("Chronomter is Stop !!",this)
+                textMsg("Aluguer terminado !!",this)
                 isPlay = false
             }
 
         }
-        pauseBtn.setOnClickListener {
+        /*pauseBtn.setOnClickListener {
             if (isPlay){
                 chronomter.stop()
                 pauseOffSet = SystemClock.elapsedRealtime() - chronomter.base
@@ -98,7 +114,7 @@ class RentActivity : AppCompatActivity() {
                 textMsg("Chronomter is Play !!",this)
                 isPlay = true
             }
-        }
+        }*/
 
 
     }
