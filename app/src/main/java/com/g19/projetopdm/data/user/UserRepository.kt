@@ -4,13 +4,23 @@ import androidx.lifecycle.LiveData
 
 class UserRepository(private val userDao: UserDao) {
 
-    val getUsers: LiveData<List<User>> = userDao.getUsers()
-
     suspend fun addUser(user: User) {
         userDao.addUser(user)
     }
 
-    suspend fun login(username: String, password: String){
+    fun login(username: String, password: String) {
         userDao.login(username, password)
+    }
+
+    fun getUser(id: Int) {
+        userDao.getUser(id)
+    }
+
+    fun getBalance(id: Int) {
+        userDao.getBalance(id)
+    }
+
+    fun updateBalance(id: Int, balance: Float) {
+        userDao.updateBalance(id, balance)
     }
 }

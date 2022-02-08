@@ -10,9 +10,9 @@ import kotlinx.coroutines.launch
 
 class VehicleViewModel(application: Application): AndroidViewModel(application) {
 
-    public val allVehicles: LiveData<List<Vehicle>>
-    public val getAllTypes: LiveData<List<String>>
-    public val repository: VehicleRepository
+    val allVehicles: LiveData<List<Vehicle>>
+    val getAllTypes: LiveData<List<String>>
+    val repository: VehicleRepository
 
     init {
         val vehicleDao = ProgramDatabase.getDatabase(application).vehicleDao()
@@ -26,14 +26,28 @@ class VehicleViewModel(application: Application): AndroidViewModel(application) 
             repository.addVehicle(vehicle)
         }
     }
+
     fun findByType(type: String){
         viewModelScope.launch(Dispatchers.IO) {
             repository.findByType(type)
         }
     }
+
     fun removeVehicle(id: Int){
         viewModelScope.launch(Dispatchers.IO) {
             repository.removeVehicle(id)
+        }
+    }
+
+    fun findBySharepoint(sharePoint : Int){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.findBySharepoint(sharePoint)
+        }
+    }
+
+    fun findById(id: Int){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.findById(id)
         }
     }
 }

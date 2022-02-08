@@ -5,7 +5,11 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_price_table.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_rent.xml" value="0.2171875" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.35507246376811596" />
+        <entry key="app/src/main/res/layout/activity_vehicle_map.xml" value="0.15625" />
       </map>
     </option>
   </component>

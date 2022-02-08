@@ -1,8 +1,6 @@
 package com.g19.projetopdm.data
 
 import android.content.Context
-import android.os.Parcel
-import android.os.Parcelable
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -13,10 +11,7 @@ import com.g19.projetopdm.data.vehicle.VehicleDao
 
 
 @Database(version = 1, exportSchema = false, entities = [Vehicle::class, User::class])
-abstract class ProgramDatabase() : RoomDatabase(), Parcelable {
-
-    constructor(parcel: Parcel): this() {
-    }
+abstract class ProgramDatabase: RoomDatabase() {
 
     abstract fun vehicleDao(): VehicleDao
     abstract fun userDao(): UserDao

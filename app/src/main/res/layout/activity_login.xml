@@ -1,8 +1,50 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/background1" tools:context=".LoginActivity">
-    <androidx.cardview.widget.CardView android:id="@+id/trotineteButtonTabela" android:layout_width="287dp" android:layout_height="325dp" android:background="#4BFFFFFF" android:backgroundTint="#E6F2FBFF" app:cardCornerRadius="10dp" app:cardElevation="5dp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.808">
-        <TextView android:id="@+id/errorText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="15dp" android:fontFamily="sans-serif-medium" android:text="User doesn't exist. Try again." android:textAlignment="center" android:textColor="#9AFF0000" android:visibility="invisible"/>
-        <androidx.cardview.widget.CardView android:id="@id/trotineteButtonTabela" android:layout_width="216dp" android:layout_height="43dp" android:layout_marginLeft="35dp" android:layout_marginTop="215dp" android:background="#439AC8" android:backgroundTint="#439AC8" app:cardCornerRadius="30dp" app:cardElevation="10dp">
-            <TextView android:id="@+id/loginbutton" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="7dp" android:fontFamily="sans-serif-medium" android:text="LOG IN" android:textAlignment="center" android:textColor="#FFFFFF" android:textSize="20sp"/>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".LoginActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="287dp"
+        android:layout_height="325dp"
+        android:background="#4BFFFFFF"
+        android:backgroundTint="#E6F2FBFF"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/errorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Credenciais erradas..."
+            android:textAlignment="center"
+            android:textColor="#9AFF0000"
+            android:visibility="invisible" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@id/cardView0"
+            android:layout_width="216dp"
+            android:layout_height="43dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="215dp"
+            android:background="#4CAF50"
+            android:backgroundTint="#4CAF50"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:id="@+id/loginbutton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="LOG IN"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
         </androidx.cardview.widget.CardView>
 
         <EditText
@@ -34,9 +76,36 @@
             android:minHeight="48dp"
             android:textColor="#000000"
             tools:ignore="SpeakableTextPresentCheck" />
-        <TextView android:id="@+id/usernameText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="112dp" android:layout_marginTop="55dp" android:fontFamily="sans-serif-medium" android:text="Username" android:textColor="#000000"/>
-        <TextView android:id="@+id/passwordText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="112dp" android:layout_marginTop="130dp" android:fontFamily="sans-serif-medium" android:text="Password" android:textColor="#000000"/>
-        <TextView android:id="@+id/registerText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="45dp" android:layout_marginTop="280dp" android:fontFamily="sans-serif-light" android:text="Don't have an account?" android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/usernameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="112dp"
+            android:layout_marginTop="55dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Username"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/passwordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="112dp"
+            android:layout_marginTop="130dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Password"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/registerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="280dp"
+            android:fontFamily="sans-serif-light"
+            android:text="Não tens conta?"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/signUpText"
@@ -45,19 +114,8 @@
             android:layout_marginLeft="195dp"
             android:layout_marginTop="280dp"
             android:fontFamily="sans-serif-black"
-            android:text="Sign up"
-            android:textColor="#0277BD" />
+            android:text="Registar"
+            android:textColor="#4CAF50" />
     </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:id="@+id/imageViewLogo"
-        android:layout_width="307dp"
-        android:layout_height="243dp"
-        android:contentDescription="Application logo."
-        app:layout_constraintBottom_toTopOf="@+id/trotineteButtonTabela"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246"
-        app:srcCompat="@drawable/logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

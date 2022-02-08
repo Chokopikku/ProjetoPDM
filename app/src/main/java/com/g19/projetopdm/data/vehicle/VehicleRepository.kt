@@ -11,11 +11,19 @@ class VehicleRepository(private val vehicleDao: VehicleDao) {
         vehicleDao.addVehicle(vehicle)
     }
 
-    suspend fun findByType(type: String){
+    fun findByType(type: String){
         vehicleDao.findByType(type)
     }
 
-    suspend fun removeVehicle(id: Int){
+    fun removeVehicle(id: Int){
         vehicleDao.removeById(id)
+    }
+
+    fun findBySharepoint(sharePoint: Int){
+        vehicleDao.findBySharepoint(sharePoint)
+    }
+
+    fun findById(id: Int): Vehicle {
+        return vehicleDao.findById(id)
     }
 }
