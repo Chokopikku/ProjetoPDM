@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ProjetoPDM</string>
+    <string name="bicycle_price">1€ + 0.50/h</string>
+    <string name="scooter_price">1€ + 1.40/h</string>
+    <string name="car_price">20€ + 3.6/h</string>
+    <string name="bike_price">3€ + 2.8/h</string>
 </resources>

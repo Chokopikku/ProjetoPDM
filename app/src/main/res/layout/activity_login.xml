@@ -1,0 +1,121 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".LoginActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="287dp"
+        android:layout_height="325dp"
+        android:background="#4BFFFFFF"
+        android:backgroundTint="#E6F2FBFF"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/errorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Credenciais erradas..."
+            android:textAlignment="center"
+            android:textColor="#9AFF0000"
+            android:visibility="invisible" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@id/cardView0"
+            android:layout_width="216dp"
+            android:layout_height="43dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="215dp"
+            android:background="#4CAF50"
+            android:backgroundTint="#4CAF50"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:id="@+id/loginbutton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="LOG IN"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/usernameInput"
+            android:layout_width="243dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19dp"
+            android:layout_marginTop="70dp"
+            android:autofillHints="Insert username"
+            android:backgroundTint="#7B9CD1"
+            android:backgroundTintMode="src_atop"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColor="#000000"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/passwordInput"
+            android:layout_width="243dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19dp"
+            android:layout_marginTop="145dp"
+            android:autofillHints="Insert password"
+            android:backgroundTint="#7B9CD1"
+            android:backgroundTintMode="src_atop"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:textColor="#000000"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/usernameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="112dp"
+            android:layout_marginTop="55dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Username"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/passwordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="112dp"
+            android:layout_marginTop="130dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Password"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/registerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="280dp"
+            android:fontFamily="sans-serif-light"
+            android:text="Não tens conta?"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/signUpText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="195dp"
+            android:layout_marginTop="280dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Registar"
+            android:textColor="#4CAF50" />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
